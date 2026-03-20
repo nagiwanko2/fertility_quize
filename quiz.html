@@ -559,7 +559,7 @@ function submitData(sc1, sc2){
     q1answers: a1.join(','),
     q2answers: a2.join(',')
   });
-  fetch(SCRIPT_URL, {method:'POST', mode:'no-cors', body:params})
+  fetch(SCRIPT_URL + '?' + params.toString(), {mode:'no-cors'})
     .catch(()=>{});
 }
 
