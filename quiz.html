@@ -419,6 +419,9 @@ const articles = {
     <div class="acard"><h3>💬 相談先</h3><p>・産婦人科・不妊専門クリニック（初診は婦人科でOK）<br>・泌尿器科（男性不妊）<br>・不妊に関する電話相談：各都道府県の不妊専門相談センター（無料）<br>・NPO法人 Fine（不妊当事者支援）</p></div>`
 };
 
+// ── Apps Script URL（設定後ここに貼り付ける）──
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx9LErBGwls8ZE1anjEu05vpekGjbj8c8204QSq9pd-h2pvKlLwUQbPUKm9lhrfKay7/exec';
+
 // ── State ──
 let level = null;
 let q1i = 0, q2i = 0;
@@ -544,6 +547,22 @@ function nxtQ2(){
   if(q2i < 12){ q2i++; renderQ2(); } else { showFinal(); }
 }
 
+function submitData(sc1, sc2){
+  if(!SCRIPT_URL || SCRIPT_URL==='YOUR_SCRIPT_URL_HERE') return;
+  const params = new URLSearchParams({
+    gender:   userInfo.gender  || '-',
+    age:      userInfo.age     || '-',
+    region:   userInfo.region  || '-',
+    level:    level,
+    q1score:  sc1,
+    q2score:  sc2,
+    q1answers: a1.join(','),
+    q2answers: a2.join(',')
+  });
+  fetch(SCRIPT_URL, {method:'POST', mode:'no-cors', body:params})
+    .catch(()=>{});
+}
+
 function showFinal(){
   const sc1 = a1.filter((x,i)=>x!=='unknown'&&x===Qs[i].a).length;
   const sc2 = a2.filter((x,i)=>x!=='unknown'&&x===Qs[i].a).length;
@@ -575,6 +594,7 @@ function showFinal(){
 
   document.getElementById('fmsg').textContent = msg;
   document.getElementById('fsub').textContent = sub;
+  submitData(sc1, sc2);
   go('s-final');
 }
 
