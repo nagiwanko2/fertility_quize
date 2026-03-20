@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>妊孕性のこと、知ってみよう</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --bg:#FFF5F8;
+      --p100:#FFE8F2;
+      --p200:#FFD1E6;
+      --p300:#FFB3D1;
+      --p400:#F28DB8;
+      --p500:#D96B9A;
+      --p600:#B84E7C;
+      --td:#3D2535;
+      --tm:#7A5068;
+      --tl:#B090A0;
+      --w:#fff;
+      --gl:#E8F5E9;--gm:#A5D6A7;--gd:#388E3C;
+      --vl:#F3E5F5;--vm:#CE93D8;--vd:#7B1FA2;
+    }
+    body{font-family:-apple-system,'Hiragino Sans','Hiragino Kaku Gothic Pro',Meiryo,sans-serif;background:var(--bg);min-height:100vh;color:var(--td)}
+    .screen{display:none;min-height:100vh;padding:24px 20px 60px;max-width:580px;margin:0 auto}
+    .screen.active{display:block}
+
+    /* ── Welcome ── */
+    .w-hero{text-align:center;padding:56px 0 32px}
+    .w-hero .big{font-size:68px;display:block;margin-bottom:18px}
+    .w-hero h1{font-size:26px;font-weight:800;color:var(--p600);line-height:1.4;margin-bottom:10px}
+    .w-hero p{font-size:14px;color:var(--tm);line-height:1.8}
+    .steps{background:var(--w);border-radius:24px;padding:20px 22px;margin:22px 0;box-shadow:0 4px 24px rgba(185,78,124,.1);border:1px solid var(--p200)}
+    .step{display:flex;align-items:flex-start;gap:14px;padding:10px 0}
+    .step:not(:last-child){border-bottom:1px solid var(--p100)}
+    .snum{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--p300),var(--p500));color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:2px}
+    .stxt{font-size:14px;color:var(--tm);line-height:1.6}
+    .stxt strong{color:var(--td);font-weight:700}
+
+    /* ── Buttons ── */
+    .btn{display:block;width:100%;padding:16px;border-radius:50px;border:none;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;text-align:center}
+    .btn-p{background:linear-gradient(135deg,var(--p400),var(--p600));color:#fff;box-shadow:0 6px 20px rgba(185,78,124,.32)}
+    .btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(185,78,124,.42)}
+    .btn-p:disabled{opacity:.5;cursor:default;transform:none}
+    .btn-o{background:var(--w);color:var(--p500);border:2px solid var(--p300)}
+    .mt8{margin-top:8px}.mt16{margin-top:16px}.mt24{margin-top:24px}
+
+    /* ── User Info ── */
+    .ui-hero{text-align:center;padding:48px 0 28px}
+    .ui-hero .big{font-size:56px;display:block;margin-bottom:16px}
+    .ui-hero h2{font-size:22px;font-weight:800;color:var(--td);margin-bottom:8px}
+    .ui-hero p{font-size:14px;color:var(--tm);line-height:1.7}
+    .ui-card{background:var(--w);border-radius:22px;padding:22px;margin-bottom:14px;box-shadow:0 4px 20px rgba(185,78,124,.09);border:1px solid var(--p100)}
+    .ui-label{font-size:14px;font-weight:700;color:var(--td);margin-bottom:12px}
+    .chip-group{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{padding:10px 18px;border-radius:50px;border:2px solid var(--p200);background:var(--w);font-size:14px;font-weight:600;color:var(--tm);cursor:pointer;transition:all .15s;font-family:inherit}
+    .chip:hover{border-color:var(--p400);color:var(--p500)}
+    .chip.on{border-color:var(--p500);background:var(--p100);color:var(--p600)}
+    .ui-select{width:100%;padding:12px 16px;border-radius:12px;border:2px solid var(--p200);font-size:14px;font-family:inherit;color:var(--td);background:var(--w);appearance:none;cursor:pointer;outline:none}
+    .ui-select:focus{border-color:var(--p400)}
+
+    /* ── Level ── */
+    .sec-tag{font-size:12px;font-weight:600;color:var(--tl);letter-spacing:1.5px;text-align:center;margin-bottom:6px;text-transform:uppercase}
+    .sec-h{font-size:22px;font-weight:800;color:var(--td);text-align:center;margin-bottom:24px;line-height:1.4;padding-top:36px}
+    .lcard{background:var(--w);border-radius:20px;padding:20px 22px;margin-bottom:12px;border:2px solid var(--p100);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:16px;box-shadow:0 2px 12px rgba(185,78,124,.06)}
+    .lcard:hover{border-color:var(--p400);box-shadow:0 6px 24px rgba(185,78,124,.18);transform:translateY(-2px)}
+    .lem{font-size:40px;flex-shrink:0}
+    .li h3{font-size:17px;font-weight:700;color:var(--td);margin-bottom:4px}
+    .li p{font-size:13px;color:var(--tl);line-height:1.5}
+    .larr{margin-left:auto;color:var(--p300);font-size:22px}
+
+    /* ── Quiz ── */
+    .qheader{padding:20px 0 16px}
+    .prow{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+    .plabel{font-size:13px;color:var(--tl)}
+    .pcnt{font-size:13px;font-weight:700;color:var(--p500)}
+    .pbar{height:6px;background:var(--p100);border-radius:10px;overflow:hidden}
+    .pfill{height:100%;background:linear-gradient(90deg,var(--p300),var(--p500));border-radius:10px;transition:width .4s ease}
+    .qcard{background:var(--w);border-radius:24px;padding:28px 22px;margin:16px 0;box-shadow:0 4px 24px rgba(185,78,124,.1);border:1px solid var(--p200)}
+    .qtag{display:inline-block;padding:4px 12px;border-radius:20px;background:var(--p100);color:var(--p500);font-size:12px;font-weight:700;margin-bottom:14px}
+    .qtext{font-size:18px;font-weight:600;line-height:1.7;color:var(--td)}
+    .alabel{font-size:13px;color:var(--tl);text-align:center;margin:20px 0 10px}
+    .abtns{display:flex;flex-direction:column;gap:10px}
+    .abtn{padding:15px 18px;border-radius:14px;border:2px solid transparent;font-size:15px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit;display:flex;align-items:center;gap:10px;text-align:left}
+    .abtn .bi{font-size:20px;flex-shrink:0}
+    .abtn:disabled{opacity:.7;cursor:default}
+
+    .abtn-c{background:var(--gl);border-color:var(--gm);color:var(--gd)}
+    .abtn-c:hover:not(:disabled){background:var(--gm);border-color:var(--gd);color:#1B5E20}
+    .abtn-c.sel{background:var(--gm);border-color:var(--gd);color:#1B5E20}
+
+    .abtn-w{background:var(--p100);border-color:var(--p300);color:var(--p600)}
+    .abtn-w:hover:not(:disabled){background:var(--p300);border-color:var(--p600);color:#fff}
+    .abtn-w.sel{background:var(--p300);border-color:var(--p600);color:#fff}
+
+    .abtn-u{background:var(--vl);border-color:var(--vm);color:var(--vd)}
+    .abtn-u:hover:not(:disabled){background:var(--vm);border-color:var(--vd);color:#fff}
+    .abtn-u.sel{background:var(--vm);border-color:var(--vd);color:#fff}
+
+    .abtn-c.reveal{background:var(--gm);border-color:var(--gd);color:#1B5E20;animation:pop .3s ease}
+    @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+
+    .expbox{margin-top:16px;padding:16px 18px;border-radius:14px;border-left:4px solid;font-size:14px;line-height:1.8;display:none}
+    .expbox.ok{background:var(--gl);border-color:var(--gm);color:#2E7D32}
+    .expbox.ng{background:var(--p100);border-color:var(--p400);color:var(--tm)}
+    .exph{font-size:14px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+    .nxtwrap{margin-top:16px;display:none}
+
+    /* ── Result/Article ── */
+    .rhero{text-align:center;padding:44px 0 24px}
+    .rem{font-size:60px;display:block;margin-bottom:16px}
+    .rhero h2{font-size:22px;font-weight:800;color:var(--td);margin-bottom:8px}
+    .rhero p{font-size:14px;color:var(--tm);line-height:1.7}
+    .scard{background:var(--w);border-radius:24px;padding:22px;margin-bottom:14px;box-shadow:0 4px 24px rgba(185,78,124,.09);border:1px solid var(--p200)}
+    .scard-label{font-size:14px;font-weight:600;color:var(--tm);margin-bottom:14px}
+    .sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center}
+    .sbox{padding:14px 6px;border-radius:14px}
+    .sbox.c{background:var(--gl)}.sbox.w{background:var(--p100)}.sbox.u{background:var(--vl)}
+    .snum{font-size:34px;font-weight:800;line-height:1}
+    .sbox.c .snum{color:var(--gd)}.sbox.w .snum{color:var(--p600)}.sbox.u .snum{color:var(--vd)}
+    .slbl{font-size:11px;font-weight:600;margin-top:5px}
+    .sbox.c .slbl{color:var(--gd)}.sbox.w .slbl{color:var(--p600)}.sbox.u .slbl{color:var(--vd)}
+    .big-score{font-size:46px;font-weight:800;color:var(--p600);text-align:center;padding:10px 0}
+    .score-sub{font-size:14px;color:var(--tl);text-align:center}
+
+    /* Article */
+    .ahero{text-align:center;padding:36px 0 20px}
+    .ahero .ai{font-size:50px;display:block;margin-bottom:12px}
+    .ahero h2{font-size:22px;font-weight:800;color:var(--td)}
+    .acard{background:var(--w);border-radius:22px;padding:22px;margin-bottom:14px;box-shadow:0 4px 20px rgba(185,78,124,.08);border:1px solid var(--p100)}
+    .acard h3{font-size:15px;font-weight:700;color:var(--p600);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+    .acard p{font-size:14px;line-height:1.85;color:var(--tm)}
+    .acard p+p{margin-top:9px}
+    .tip{margin-top:12px;padding:12px 14px;background:var(--p100);border-radius:10px;font-size:13px;color:var(--p600);line-height:1.7}
+    .tip strong{font-weight:700}
+
+    /* Final */
+    .profile-tag{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--p100);border-radius:20px;font-size:13px;color:var(--p600);font-weight:600;margin-bottom:12px}
+    .crow{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+    .clbl{font-size:12px;font-weight:600;color:var(--tl);width:56px;flex-shrink:0}
+    .cbwrap{flex:1;height:30px;background:var(--p100);border-radius:8px;overflow:hidden}
+    .cbar{height:100%;border-radius:8px;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;font-size:13px;font-weight:700;color:#fff;transition:width .7s ease;min-width:40px}
+    .cbar.b1{background:linear-gradient(90deg,var(--p200),var(--p300))}
+    .cbar.b2{background:linear-gradient(90deg,var(--p400),var(--p600))}
+    .mini2{display:flex;justify-content:center;gap:24px;margin-top:16px;text-align:center}
+    .mini2 .mn{font-size:34px;font-weight:800;color:var(--gd)}
+    .mini2 .ml{font-size:12px;color:var(--tl);margin-top:4px}
+    .arrow-mid{display:flex;align-items:center;color:var(--tl);font-size:22px;padding-top:6px}
+  </style>
+</head>
+<body>
+
+<!-- ① Welcome -->
+<div class="screen active" id="s-welcome">
+  <div class="w-hero">
+    <span class="big">🌸</span>
+    <h1>妊孕性のこと、<br>いっしょに知ろう</h1>
+    <p>クイズと記事で、妊娠する力について<br>やさしく学べるページです</p>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="snum">1</div><div class="stxt"><strong>あなたのことを教えてね</strong><br>性別・年齢・地域を入力</div></div>
+    <div class="step"><div class="snum">2</div><div class="stxt"><strong>レベルを選ぶ</strong><br>どのくらい知りたいか選んでね</div></div>
+    <div class="step"><div class="snum">3</div><div class="stxt"><strong>クイズ①（13問）</strong><br>○・×・？で答えよう</div></div>
+    <div class="step"><div class="snum">4</div><div class="stxt"><strong>記事を読む</strong><br>知識がふえる読み物</div></div>
+    <div class="step"><div class="snum">5</div><div class="stxt"><strong>クイズ②（同じ13問）</strong><br>解説つきでもう一度確認</div></div>
+  </div>
+  <button class="btn btn-p" onclick="go('s-userinfo')">はじめる</button>
+</div>
+
+<!-- ② User Info -->
+<div class="screen" id="s-userinfo">
+  <div class="ui-hero">
+    <span class="big">👤</span>
+    <h2>あなたのことを教えてね</h2>
+    <p>回答は保存されません。<br>答えたくない項目はスキップできます。</p>
+  </div>
+
+  <div class="ui-card">
+    <div class="ui-label">性別</div>
+    <div class="chip-group" id="gender-group">
+      <button class="chip" onclick="selectChip('gender','男性',this)">男性</button>
+      <button class="chip" onclick="selectChip('gender','女性',this)">女性</button>
+      <button class="chip" onclick="selectChip('gender','その他',this)">その他</button>
+      <button class="chip" onclick="selectChip('gender','答えたくない',this)">答えたくない</button>
+    </div>
+  </div>
+
+  <div class="ui-card">
+    <div class="ui-label">年齢</div>
+    <div class="chip-group" id="age-group">
+      <button class="chip" onclick="selectChip('age','10代以下',this)">10代以下</button>
+      <button class="chip" onclick="selectChip('age','20代',this)">20代</button>
+      <button class="chip" onclick="selectChip('age','30代',this)">30代</button>
+      <button class="chip" onclick="selectChip('age','40代',this)">40代</button>
+      <button class="chip" onclick="selectChip('age','50代以上',this)">50代以上</button>
+      <button class="chip" onclick="selectChip('age','答えたくない',this)">答えたくない</button>
+    </div>
+  </div>
+
+  <div class="ui-card">
+    <div class="ui-label">地域</div>
+    <select class="ui-select" id="region-select" onchange="userInfo.region=this.value">
+      <option value="">選択してください</option>
+      <option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option>
+      <option>秋田県</option><option>山形県</option><option>福島県</option><option>茨城県</option>
+      <option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option>
+      <option>東京都</option><option>神奈川県</option><option>新潟県</option><option>富山県</option>
+      <option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option>
+      <option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option>
+      <option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option>
+      <option>奈良県</option><option>和歌山県</option><option>鳥取県</option><option>島根県</option>
+      <option>岡山県</option><option>広島県</option><option>山口県</option><option>徳島県</option>
+      <option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option>
+      <option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option>
+      <option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option><option>海外</option>
+      <option>答えたくない</option>
+    </select>
+  </div>
+
+  <button class="btn btn-p mt16" onclick="go('s-level')">次へ →</button>
+</div>
+
+<!-- ③ Level -->
+<div class="screen" id="s-level">
+  <div class="sec-tag">STEP 2</div>
+  <div class="sec-h">どのくらい<br>知りたいですか？</div>
+  <div class="lcard" onclick="startQuiz('detail')">
+    <span class="lem">🔍</span>
+    <div class="li"><h3>詳しく知りたい</h3><p>深くしっかり学びたい人向け。<br>くわしい解説がたくさん。</p></div>
+    <span class="larr">›</span>
+  </div>
+  <div class="lcard" onclick="startQuiz('normal')">
+    <span class="lem">📖</span>
+    <div class="li"><h3>知りたい</h3><p>基本をわかりやすく。<br>まず知っておきたい人に。</p></div>
+    <span class="larr">›</span>
+  </div>
+  <div class="lcard" onclick="startQuiz('light')">
+    <span class="lem">🌼</span>
+    <div class="li"><h3>少しだけ知りたい</h3><p>やさしく、さらっと。<br>ゆっくりなペースで大丈夫。</p></div>
+    <span class="larr">›</span>
+  </div>
+</div>
+
+<!-- ④ Quiz 1 -->
+<div class="screen" id="s-q1">
+  <div class="qheader">
+    <div class="prow"><span class="plabel">クイズ①</span><span class="pcnt" id="q1cnt">1 / 13</span></div>
+    <div class="pbar"><div class="pfill" id="q1bar" style="width:0%"></div></div>
+  </div>
+  <div class="qcard">
+    <div class="qtag" id="q1tag">Q1</div>
+    <div class="qtext" id="q1text"></div>
+    <div class="alabel">この説明は正しいと思う？</div>
+    <div class="abtns">
+      <button class="abtn abtn-c" id="q1bc" onclick="ansQ1('correct')"><span class="bi">⭕️</span><span>正解（本当だと思う）</span></button>
+      <button class="abtn abtn-w" id="q1bw" onclick="ansQ1('wrong')"><span class="bi">❌</span><span>間違い（違うと思う）</span></button>
+      <button class="abtn abtn-u" id="q1bu" onclick="ansQ1('unknown')"><span class="bi">❓</span><span>わからない</span></button>
+    </div>
+  </div>
+  <div class="nxtwrap" id="q1nx"><button class="btn btn-p" id="q1nxbtn" onclick="nxtQ1()">次の問題へ →</button></div>
+</div>
+
+<!-- ⑤ Q1 Result -->
+<div class="screen" id="s-q1r">
+  <div class="rhero">
+    <span class="rem">📝</span>
+    <h2>クイズ①おわり！</h2>
+    <p>13問終わりました。<br>次は知識を増やす記事を読みましょう。</p>
+  </div>
+  <div class="scard">
+    <div class="scard-label">あなたの回答</div>
+    <div class="sgrid">
+      <div class="sbox c"><div class="snum" id="r1c">0</div><div class="slbl">正解と答えた</div></div>
+      <div class="sbox w"><div class="snum" id="r1w">0</div><div class="slbl">間違いと答えた</div></div>
+      <div class="sbox u"><div class="snum" id="r1u">0</div><div class="slbl">わからなかった</div></div>
+    </div>
+  </div>
+  <div class="scard">
+    <div class="scard-label">実際の正答数</div>
+    <div class="big-score" id="r1score">0</div>
+    <div class="score-sub">/ 13問 正解</div>
+  </div>
+  <button class="btn btn-p mt16" onclick="go('s-article'); loadArticle()">記事を読む 📖</button>
+</div>
+
+<!-- ⑥ Article -->
+<div class="screen" id="s-article">
+  <div class="ahero">
+    <span class="ai">📚</span>
+    <h2>知識を増やそう</h2>
+  </div>
+  <div id="art"></div>
+  <button class="btn btn-p mt8" onclick="startQ2()">クイズ②へ進む ✨</button>
+</div>
+
+<!-- ⑦ Quiz 2 -->
+<div class="screen" id="s-q2">
+  <div class="qheader">
+    <div class="prow"><span class="plabel">クイズ②（解説つき）</span><span class="pcnt" id="q2cnt">1 / 13</span></div>
+    <div class="pbar"><div class="pfill" id="q2bar" style="width:0%"></div></div>
+  </div>
+  <div class="qcard">
+    <div class="qtag" id="q2tag">Q1</div>
+    <div class="qtext" id="q2text"></div>
+    <div class="alabel">この説明は正しいと思う？</div>
+    <div class="abtns">
+      <button class="abtn abtn-c" id="q2bc" onclick="ansQ2('correct')"><span class="bi">⭕️</span><span>正解（本当だと思う）</span></button>
+      <button class="abtn abtn-w" id="q2bw" onclick="ansQ2('wrong')"><span class="bi">❌</span><span>間違い（違うと思う）</span></button>
+      <button class="abtn abtn-u" id="q2bu" onclick="ansQ2('unknown')"><span class="bi">❓</span><span>わからない</span></button>
+    </div>
+    <div class="expbox" id="q2exp"><div class="exph" id="q2exph"></div><div id="q2expt"></div></div>
+  </div>
+  <div class="nxtwrap" id="q2nx"><button class="btn btn-p" id="q2nxbtn" onclick="nxtQ2()">次の問題へ →</button></div>
+</div>
+
+<!-- ⑧ Final -->
+<div class="screen" id="s-final">
+  <div class="rhero">
+    <span class="rem">🌸</span>
+    <div id="fprofile"></div>
+    <h2 id="fmsg">よくできました！</h2>
+    <p id="fsub">記事を読んで知識が増えたかな？</p>
+  </div>
+  <div class="scard">
+    <div class="scard-label">クイズ①→②の正解数の変化</div>
+    <div class="crow"><span class="clbl">クイズ①</span><div class="cbwrap"><div class="cbar b1" id="cb1">-</div></div></div>
+    <div class="crow"><span class="clbl">クイズ②</span><div class="cbwrap"><div class="cbar b2" id="cb2">-</div></div></div>
+    <div class="mini2">
+      <div><div class="mn" id="fbef">0</div><div class="ml">クイズ① 正解</div></div>
+      <div class="arrow-mid">→</div>
+      <div><div class="mn" id="faft">0</div><div class="ml">クイズ② 正解</div></div>
+    </div>
+  </div>
+  <div class="scard">
+    <div class="scard-label">クイズ②の回答内訳</div>
+    <div class="sgrid">
+      <div class="sbox c"><div class="snum" id="fc">0</div><div class="slbl">正解と答えた</div></div>
+      <div class="sbox w"><div class="snum" id="fw">0</div><div class="slbl">間違いと答えた</div></div>
+      <div class="sbox u"><div class="snum" id="fu">0</div><div class="slbl">わからなかった</div></div>
+    </div>
+  </div>
+  <button class="btn btn-o mt16" onclick="restart()">もう一度やってみる</button>
+</div>
+
+<script>
+// ── 妊孕性知識尺度13（CFKS-J）──
+const Qs = [
+  {t:"36歳以降、女性の妊孕性（妊娠する力）は低下する",a:"correct",
+   e:{light:"女性の妊娠しやすさは、36歳を過ぎると徐々に下がっていきます。年齢は妊娠に大きく関係しています。",
+      normal:"女性の妊孕性は30代半ばから低下し、36歳以降は低下が加速します。卵子の数と質が年齢とともに変化するためです。",
+      detail:"女性の卵子の数は生まれた時から決まっており、年齢とともに減少・劣化します。36歳以降は妊娠率の低下と流産率の上昇が顕著になります。AMH（抗ミュラー管ホルモン）検査で卵巣予備能を評価できます。"}},
+  {t:"1年間、定期的に避妊なしの性交を続けても妊娠しなければ不妊と分類される",a:"correct",
+   e:{light:"1年間、避妊なしで性交を続けても妊娠しない場合は、不妊として医療機関に相談するタイミングです。",
+      normal:"医学的には、定期的な避妊なし性交を1年間続けても妊娠しない場合を「不妊」と定義します。35歳以上では6ヶ月を目安に専門医への相談が推奨されます。",
+      detail:"WHO・日本産科婦人科学会ともに「1年間の定期的な性交渉後も妊娠しない」を不妊の定義とします。35歳以上は6ヶ月に短縮して受診を検討します。不妊の原因は女性側・男性側・原因不明がそれぞれ約1/3とされています。"}},
+  {t:"喫煙は女性の妊孕性を低下させる",a:"correct",
+   e:{light:"喫煙は女性の妊娠しやすさを下げることが分かっています。妊娠を望む場合は禁煙が大切です。",
+      normal:"喫煙は女性の卵子の質を下げ、卵巣機能を低下させることで妊孕性に悪影響を与えます。禁煙により妊孕性が改善する可能性があります。",
+      detail:"喫煙に含まれるニコチンや有害物質は卵巣機能を障害し、卵子の質低下・早期閉経・流産率の上昇・子宮外妊娠リスクの増加をもたらします。受動喫煙も同様のリスクがあります。"}},
+  {t:"喫煙は男性の妊孕性を低下させる",a:"correct",
+   e:{light:"喫煙は男性の精子にも悪影響があります。妊娠を望む場合は男女ともに禁煙が大切です。",
+      normal:"喫煙は男性の精子の数・運動率・形態に悪影響を与え、妊孕性を低下させます。パートナーが妊娠を望む場合、男性の禁煙も重要です。",
+      detail:"喫煙は精子濃度・運動率・正常形態率をすべて低下させ、精子DNA損傷率を高めます。禁煙後3ヶ月程度で精液所見の改善が期待されます。"}},
+  {t:"約10組に1組のカップルが不妊である",a:"correct",
+   e:{light:"実は10組に1組くらいのカップルが不妊で悩んでいます。決して珍しいことではありません。",
+      normal:"日本では約5〜6組に1組のカップルが不妊を経験しており、不妊は決して珍しい問題ではありません。",
+      detail:"日本産科婦人科学会のデータでは日本の不妊カップルは5〜6組に1組とされ、世界的にも10組に1組以上の割合で不妊に悩むカップルがいます。2021年には体外受精での出生数が約7万人（全出生の約7%）に達しています。"}},
+  {t:"精子を産生している男性は妊孕性がある",a:"wrong",
+   e:{light:"精子があるだけでは、妊娠させる力があるとは言えません。精子の数・動き・形も大切です。",
+      normal:"精子が産生されていても、数が少ない・運動率が低い・形態が悪い場合は妊孕性に問題があります。精子の有無だけでは妊孕性は判断できません。",
+      detail:"男性不妊の評価には精液検査が必要で、精子濃度（基準：1500万/mL以上）・運動率（40%以上）・正常形態率（4%以上・WHO2010基準）などを総合的に評価します。精子がいても質が低ければ妊孕性に問題があります。"}},
+  {t:"現在、40代女性と30代女性の妊娠確率は同等である",a:"wrong",
+   e:{light:"40代と30代では妊娠しやすさが大きく違います。年齢が上がるほど妊娠は難しくなります。",
+      normal:"40代女性の自然妊娠率は30代女性と比べて大幅に低下します。年齢による卵子の質・量の低下が主な原因です。",
+      detail:"自然妊娠率（1周期あたり）は20代後半で約20〜25%、35歳で約15%、40歳で約5%、43歳以降では約1〜2%に低下します。体外受精でも40代は胚の染色体異常率が高く、生産率は大きく下がります。"}},
+  {t:"健康的なライフスタイルを送ることで妊孕性がもたらされる",a:"wrong",
+   e:{light:"健康的な生活は大切ですが、それだけで必ず妊娠できるわけではありません。",
+      normal:"健康的なライフスタイルは妊孕性の維持に役立ちますが、体質・年齢・病気などの要因で不妊になることがあります。健康な生活だけが妊孕性を「もたらす」とは言えません。",
+      detail:"妊孕性に影響する要因は多岐にわたり（年齢・遺伝・ホルモン・解剖学的問題など）、健康的なライフスタイルだけでは解決できない場合があります。ただし適正体重・禁煙・節酒・ストレス管理などは妊孕性改善に寄与します。"}},
+  {t:"思春期後におたふく風邪（ムンプス）にかかると、後に妊孕性の問題が起きる可能性が高まる",a:"correct",
+   e:{light:"思春期以降におたふく風邪にかかると、妊孕性（妊娠する力）に影響が出ることがあります。",
+      normal:"思春期以降（特に成人男性）がおたふく風邪に罹患すると、精巣炎を合併して精子産生能力が低下する可能性があります。",
+      detail:"ムンプスウイルスは思春期以降の男性で精巣炎を合併する確率が約20〜30%とされます。精巣炎による精細管の障害は無精子症・乏精子症の原因になります。MRワクチンで予防できます。"}},
+  {t:"月経がない女性でも妊孕性がある",a:"wrong",
+   e:{light:"月経がない場合、排卵が起きていない可能性が高く、妊娠しにくい状態であることが多いです。",
+      normal:"月経がない（無月経）状態は排卵が起きていないことが多く、妊孕性に問題がある可能性が高いです。原因を調べ、治療が必要な場合があります。",
+      detail:"無月経には視床下部性（過度のダイエット・運動など）・下垂体性・卵巣性（早発卵巣不全など）・子宮性などがあり、多くの場合排卵障害を伴います。原因によっては治療で妊孕性が回復するケースもあります。"}},
+  {t:"標準体重より13kg以上太っている女性は妊娠できないかもしれない",a:"correct",
+   e:{light:"適正体重から大きく外れると、ホルモンバランスが崩れて妊娠しにくくなることがあります。",
+      normal:"肥満（BMI 30以上）は排卵障害・月経不順の原因となり、妊孕性を低下させます。標準体重に近づけることが妊孕性改善に有効です。",
+      detail:"脂肪組織はエストロゲンを産生し、過剰な脂肪は視床下部-下垂体-卵巣軸のホルモンバランスを乱します。BMI 30以上では自然妊娠率・ART成功率ともに低下します。多嚢胞性卵巣症候群（PCOS）を合併することも多いです。"}},
+  {t:"勃起が可能な男性は妊孕性がある",a:"wrong",
+   e:{light:"勃起ができても、精子に問題がある場合は妊娠させることができないことがあります。",
+      normal:"勃起能力と妊孕性（精子の質・量）は別の問題です。勃起ができても精子の数が少ない・運動率が低いなどの場合、妊孕性に問題があります。",
+      detail:"勃起は神経・血管・ホルモンの機能を反映しますが、精子産生は精巣の機能によります。勃起障害なく射精できても、無精子症・重度乏精子症の場合は自然妊娠が困難です。男性不妊の評価には精液検査が不可欠です。"}},
+  {t:"性感染症にかかったことがある人は妊孕性が低下している可能性がある",a:"correct",
+   e:{light:"過去に性感染症にかかったことがある場合、妊娠しにくくなることがあります。早期治療が大切です。",
+      normal:"クラミジアや淋病などの性感染症は、治療が遅れると卵管や精管に癒着・閉塞を引き起こし、妊孕性を低下させることがあります。",
+      detail:"クラミジア感染は女性の卵管閉塞・骨盤内炎症性疾患（PID）の主要原因で、子宮外妊娠リスクも高めます。男性でも精巣上体炎による閉塞性無精子症の原因になります。無症状でも感染・合併症が起こるため、定期的な検査が重要です。"}}
+];
+
+const articles = {
+  light:`
+    <div class="acard"><h3>🌸 妊孕性って何？</h3><p>妊孕性とは「妊娠する力」のことです。女性の場合は卵子の数や質、男性の場合は精子の数や動きが関係しています。</p><p>年齢とともに少しずつ変化するので、妊娠を考えているなら早めに知っておくと安心です。</p></div>
+    <div class="acard"><h3>📅 年齢と妊娠</h3><p>女性の妊娠しやすさは、36歳を過ぎると徐々に下がっていきます。これは卵子の数や質が変わるためで、自然なことです。</p><p>気になる場合は、産婦人科で相談することができます。</p></div>
+    <div class="acard"><h3>💬 困ったときは</h3><p>妊娠のことで不安があれば、産婦人科や不妊専門クリニックに相談できます。一人で抱え込まないでください。</p></div>`,
+  normal:`
+    <div class="acard"><h3>📅 年齢と女性の妊孕性</h3><p>女性の妊孕性は30代半ばから低下し、36歳以降は特に低下が加速します。卵子の数は生まれた時から決まっており、年齢とともに減少・劣化します。</p><div class="tip"><strong>ポイント：</strong>妊娠を将来考えている場合、早めに自分の卵巣機能を知っておくことが大切です（AMH検査など）。</div></div>
+    <div class="acard"><h3>🚬 妊孕性に影響する生活習慣</h3><p>以下の習慣は妊孕性を低下させることが分かっています。<br>・<strong>喫煙</strong>（男女ともに影響あり）<br>・<strong>肥満</strong>（BMI 30以上は排卵障害のリスク）<br>・<strong>過度の痩せ</strong>（無月経・排卵障害の原因に）</p><p>一方、健康的な生活だけで必ず妊娠できるわけではありません。病気や年齢などの要因もあります。</p></div>
+    <div class="acard"><h3>👨 男性の妊孕性</h3><p>不妊の原因は男女ほぼ同等です。勃起ができる・精子があるだけでは妊孕性があるとは言えません。精子の数・運動率・形態を精液検査で確認することが大切です。</p></div>
+    <div class="acard"><h3>🦠 性感染症と妊孕性</h3><p>クラミジアや淋病などの性感染症は、治療が遅れると卵管閉塞や精巣上体炎を引き起こし、妊孕性を低下させることがあります。無症状でも感染している場合があるため、定期的な検査が重要です。</p></div>
+    <div class="acard"><h3>💬 不妊の定義と相談先</h3><p>1年間（35歳以上は6ヶ月）、避妊なしの定期的な性交渉後も妊娠しない場合は「不妊」として専門医への相談が推奨されます。日本では約5〜6組に1組が不妊を経験しており、珍しい問題ではありません。</p></div>`,
+  detail:`
+    <div class="acard"><h3>📅 年齢と妊孕性（女性）</h3><p>自然妊娠率（1周期あたり）は20代後半で約20〜25%、35歳で約15%、40歳で約5%、43歳以降では約1〜2%に低下します。卵子の数はAMH（抗ミュラー管ホルモン）検査で、質は形態評価や受精後の胚の状態で把握できます。</p><div class="tip"><strong>早発卵巣不全（POI）：</strong>40歳未満で閉経状態になることがあります。月経不順が続く場合は早めの受診を。</div></div>
+    <div class="acard"><h3>👨 男性の妊孕性と精液検査</h3><p>男性不妊の評価基準（WHO 2010）：精子濃度 1500万/mL以上・運動率 40%以上・正常形態率 4%以上。これらを下回ると妊孕性に問題がある可能性があります。</p><p>勃起・射精が可能でも、無精子症や重度乏精子症の場合は自然妊娠が困難です。不妊の原因は男女ほぼ同等（各1/3ずつ）であるため、カップル双方の検査が重要です。</p></div>
+    <div class="acard"><h3>🚬 妊孕性に影響する因子</h3><p><strong>喫煙：</strong>男女ともに妊孕性を低下。卵子の質劣化・精子DNA損傷・早期閉経リスク。禁煙後3ヶ月で精液所見改善が期待される。<br><strong>肥満：</strong>BMI 30以上は排卵障害・PCOS合併リスクが高まる。ART成功率も低下。<br><strong>低体重：</strong>BMI 18未満の無月経は視床下部性排卵障害の原因になる。<br><strong>おたふく風邪：</strong>思春期以降の男性の精巣炎は無精子症・乏精子症の原因に（MRワクチンで予防可能）。</p></div>
+    <div class="acard"><h3>🦠 性感染症と妊孕性</h3><p>クラミジアは女性の卵管閉塞・骨盤内炎症性疾患（PID）・子宮外妊娠の主要原因です。男性でも精巣上体炎による閉塞性無精子症を引き起こします。感染者の多くが無症状であるため、性的活動がある場合は定期的なSTI検査が推奨されます。</p></div>
+    <div class="acard"><h3>🏥 不妊治療の概要</h3><p>・<strong>タイミング法</strong>：排卵時期を特定して性交渉のタイミングを合わせる<br>・<strong>人工授精（AIH）</strong>：精子を子宮内に直接注入<br>・<strong>体外受精（IVF）・顕微授精（ICSI）</strong>：卵子と精子を体外で受精させ子宮内に移植<br>2021年度から体外受精等の保険適用が拡大（43歳未満・通算6回まで）。</p></div>
+    <div class="acard"><h3>💬 相談先</h3><p>・産婦人科・不妊専門クリニック（初診は婦人科でOK）<br>・泌尿器科（男性不妊）<br>・不妊に関する電話相談：各都道府県の不妊専門相談センター（無料）<br>・NPO法人 Fine（不妊当事者支援）</p></div>`
+};
+
+// ── State ──
+let level = null;
+let q1i = 0, q2i = 0;
+let a1 = [], a2 = [];
+let a1done = false, a2done = false;
+let userInfo = {gender:'', age:'', region:''};
+
+function go(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ── User Info ──
+function selectChip(field, value, el){
+  const group = document.getElementById(field+'-group');
+  group.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  userInfo[field] = value;
+}
+
+// ── Quiz Start ──
+function startQuiz(lv){
+  level = lv; q1i = 0; a1 = []; a1done = false;
+  go('s-q1'); renderQ1();
+}
+
+function renderQ1(){
+  const q = Qs[q1i];
+  document.getElementById('q1cnt').textContent = `${q1i+1} / 13`;
+  document.getElementById('q1bar').style.width = `${(q1i/13)*100}%`;
+  document.getElementById('q1tag').textContent = `Q${q1i+1}`;
+  document.getElementById('q1text').textContent = q.t;
+  ['q1bc','q1bw','q1bu'].forEach(id=>{
+    const el = document.getElementById(id);
+    el.classList.remove('sel'); el.disabled = false;
+  });
+  document.getElementById('q1nx').style.display = 'none';
+  a1done = false;
+  document.getElementById('q1nxbtn').textContent = q1i < 12 ? '次の問題へ →' : '結果を見る 📝';
+}
+
+function ansQ1(ans){
+  if(a1done) return; a1done = true;
+  a1.push(ans);
+  const m = {correct:'q1bc', wrong:'q1bw', unknown:'q1bu'};
+  document.getElementById(m[ans]).classList.add('sel');
+  setTimeout(()=>{ document.getElementById('q1nx').style.display='block'; }, 350);
+}
+
+function nxtQ1(){
+  if(q1i < 12){ q1i++; renderQ1(); } else { showQ1r(); }
+}
+
+function showQ1r(){
+  const c = a1.filter(x=>x==='correct').length;
+  const w = a1.filter(x=>x==='wrong').length;
+  const u = a1.filter(x=>x==='unknown').length;
+  const sc = a1.filter((x,i)=>x!=='unknown' && x===Qs[i].a).length;
+  document.getElementById('r1c').textContent = c;
+  document.getElementById('r1w').textContent = w;
+  document.getElementById('r1u').textContent = u;
+  document.getElementById('r1score').textContent = sc;
+  go('s-q1r');
+}
+
+function loadArticle(){
+  document.getElementById('art').innerHTML = articles[level];
+}
+
+function startQ2(){
+  q2i = 0; a2 = []; a2done = false;
+  go('s-q2'); renderQ2();
+}
+
+function renderQ2(){
+  const q = Qs[q2i];
+  document.getElementById('q2cnt').textContent = `${q2i+1} / 13`;
+  document.getElementById('q2bar').style.width = `${(q2i/13)*100}%`;
+  document.getElementById('q2tag').textContent = `Q${q2i+1}`;
+  document.getElementById('q2text').textContent = q.t;
+  ['q2bc','q2bw','q2bu'].forEach(id=>{
+    const el = document.getElementById(id);
+    el.classList.remove('sel','reveal'); el.disabled = false;
+  });
+  const exp = document.getElementById('q2exp');
+  exp.style.display = 'none'; exp.className = 'expbox';
+  document.getElementById('q2nx').style.display = 'none';
+  a2done = false;
+  document.getElementById('q2nxbtn').textContent = q2i < 12 ? '次の問題へ →' : '結果を見る 🌸';
+}
+
+function ansQ2(ans){
+  if(a2done) return; a2done = true;
+  a2.push(ans);
+  const q = Qs[q2i];
+  const isOk = ans!=='unknown' && ans===q.a;
+  const m = {correct:'q2bc', wrong:'q2bw', unknown:'q2bu'};
+  ['q2bc','q2bw','q2bu'].forEach(id=>document.getElementById(id).disabled=true);
+  document.getElementById(m[ans]).classList.add('sel');
+  if(!isOk){
+    const cid = q.a==='correct'?'q2bc':'q2bw';
+    document.getElementById(cid).classList.add('reveal');
+  }
+  const exp = document.getElementById('q2exp');
+  const ansLabel = q.a==='correct'?'⭕️ 正しい内容（正解）':'❌ 間違った内容';
+  if(ans==='unknown'){
+    exp.className='expbox ng';
+    document.getElementById('q2exph').textContent = `📖 答えは：${ansLabel}`;
+  } else if(isOk){
+    exp.className='expbox ok';
+    document.getElementById('q2exph').textContent = `✨ 正解！ ${ansLabel}`;
+  } else {
+    exp.className='expbox ng';
+    document.getElementById('q2exph').textContent = `答えは：${ansLabel}`;
+  }
+  document.getElementById('q2expt').textContent = q.e[level];
+  exp.style.display = 'block';
+  document.getElementById('q2nx').style.display = 'block';
+}
+
+function nxtQ2(){
+  if(q2i < 12){ q2i++; renderQ2(); } else { showFinal(); }
+}
+
+function showFinal(){
+  const sc1 = a1.filter((x,i)=>x!=='unknown'&&x===Qs[i].a).length;
+  const sc2 = a2.filter((x,i)=>x!=='unknown'&&x===Qs[i].a).length;
+  const c2 = a2.filter(x=>x==='correct').length;
+  const w2 = a2.filter(x=>x==='wrong').length;
+  const u2 = a2.filter(x=>x==='unknown').length;
+
+  document.getElementById('fbef').textContent = sc1;
+  document.getElementById('faft').textContent = sc2;
+  document.getElementById('fc').textContent = c2;
+  document.getElementById('fw').textContent = w2;
+  document.getElementById('fu').textContent = u2;
+  document.getElementById('cb1').style.width = Math.max((sc1/13)*100,5)+'%';
+  document.getElementById('cb1').textContent = sc1+'問';
+  document.getElementById('cb2').style.width = Math.max((sc2/13)*100,5)+'%';
+  document.getElementById('cb2').textContent = sc2+'問';
+
+  // Profile tag
+  const parts = [userInfo.gender, userInfo.age, userInfo.region].filter(v=>v&&v!=='答えたくない'&&v!=='');
+  const profileEl = document.getElementById('fprofile');
+  profileEl.innerHTML = parts.length ? `<div class="profile-tag">👤 ${parts.join('・')}</div>` : '';
+
+  const diff = sc2 - sc1;
+  let msg, sub;
+  if(sc2>=11){ msg='素晴らしい！ 🌸'; sub='妊孕性についてよく知っていますね。この知識をぜひ周りにも伝えてあげてください。'; }
+  else if(sc2>=8){ msg='よくできました！'; sub='記事を読んで知識が増えましたね。引き続き学んでいきましょう。'; }
+  else { msg='お疲れさまでした！'; sub='知らなかったことがあっても大丈夫。少しずつ知っていけばいいんです。'; }
+  if(diff>0) sub = `クイズ①より${diff}問多く正解しました！ `+sub;
+
+  document.getElementById('fmsg').textContent = msg;
+  document.getElementById('fsub').textContent = sub;
+  go('s-final');
+}
+
+function restart(){
+  level=null; q1i=0; q2i=0; a1=[]; a2=[]; a1done=false; a2done=false;
+  userInfo={gender:'',age:'',region:''};
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  document.getElementById('region-select').value='';
+  go('s-welcome');
+}
+</script>
+</body>
+</html>
